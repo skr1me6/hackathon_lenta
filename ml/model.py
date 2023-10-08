@@ -1,11 +1,19 @@
-def forecast(sales: dict, item_info: dict, store_info: dict) -> list:
-    """
-    Функция для предсказания продажЖ
-    :params sales: исторические данные по продажам
-    :params item_info: характеристики товара
-    :params store_info: характеристики магазина
 
+
+# Получаем текущую дату и время
+import pickle
+import os
+
+def forecast(df,sku_,fold):
     """
-    sales = [el["sales_units"] for el in sales]
-    mean_sale = sum(sales) / len(sales)
-    return [mean_sale] * 5
+    Загрузка моделей для конкретного магазина.
+    :param df: DF
+    :param sku_: название модели
+    :param fold: путь магазина
+    :return: Массив предсказаний
+    """
+
+    with open(os.path.join(fold, f'{sku_}.pkl'), 'rb') as file:
+        sku_n_model = pickle.load(file)
+    predictions = sku_n_model.predict(df)
+    return predictions
