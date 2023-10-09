@@ -1,3 +1,3 @@
-![Иллюстрация к проекту]([https://github.com/jon/coolproject/raw/master/image/image.png](https://prairie-parade-285.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F039f5dfd-04da-4228-b303-df321f2829df%2F10.jpg?table=block&id=6fe1fbb2-4cba-47f2-b860-9103c403999e&spaceId=dd27bcbf-194a-442c-bd0c-6943a528b82c&width=2000&userId=&cache=v2)https://prairie-parade-285.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F039f5dfd-04da-4228-b303-df321f2829df%2F10.jpg?table=block&id=6fe1fbb2-4cba-47f2-b860-9103c403999e&spaceId=dd27bcbf-194a-442c-bd0c-6943a528b82c&width=2000&userId=&cache=v2)
+![Иллюстрация к проекту]([https://github.com/jon/coolproject/raw/master/image/image.png](https://cdn.forbes.ru/files/dutef.jpg__1622460812__90442.jpg)
 # hackathon_lenta
 modeling demand for products of own production
