@@ -1,86 +1,72 @@
-import requests
-import os
-import logging
-from datetime import date, timedelta
+#Импорты. Проверить, что все библиотеки поставлены.
+import numpy as np
+import pandas as pd
+import pickle
+from catboost import CatboostRegressor
 
-from model import forecast
+# Загрузка датафрейма теста.
+# Поменять путь на свой.
+with open(
+    '/home/kubanez/Dev/hackathon_lenta/app/'
+    'df_test.pkl', 'rb'
+) as df:
+    df_test = pickle.load(df)
 
-URL_CATEGORIES = "categories"
-URL_SALES = "sales"
-URL_STORES = "shops"
-URL_FORECAST = "forecast"
+# Загрузка признаков теста.
+# Поменять путь на свой.
+with open(
+    '/home/kubanez/Dev/hackathon_lenta/app/'
+    'features_test', 'rb'
+) as f:
+    features_test = pickle.load(f)
 
-api_port = os.environ.get("API_PORT", "8000")
-api_host = os.environ.get("API_PORT", "localhost")
+# Загрузка таргета теста.
+# Поменять путь на свой.
+with open(
+    '/home/kubanez/Dev/hackathon_lenta/app/'
+    'target_test.pkl', 'rb'
+) as t:
+    target_test = pickle.load(t)
 
-_logger = logging.getLogger(__name__)
+# Загрузка модели.
+# Поменять путь на свой.
+with open(
+    '/home/kubanez/Dev/hackathon_lenta/app/'
+    'catboost_model_40.0.pkl', 'rb'
+) as m:
+    model = pickle.load(m)
 
+# Предсказания модели.
+predictions = model.predict(features_test)
 
-def setup_logging():
-    _logger = logging.getLogger(__name__)
-    _logger.setLevel(logging.DEBUG)
-    handler_m = logging.StreamHandler()
-    formatter_m = logging.Formatter("%(name)s %(asctime)s %(levelname)s %(message)s")
-    handler_m.setFormatter(formatter_m)
-    _logger.addHandler(handler_m)
+df_to_endpoint = pd.DataFrame()
 
+df_to_endpoint[['st_id', 'date', 'pr_sku_id']] = df_test[['st_id', 'date', 'pr_sku_id']]
+df_to_endpoint['sales_units'] = predictions
 
-def get_address(resource):
-    return "http://" + api_host + ":" + api_port + "/" + resource
+# День прогноза
+today='07/05/2023'
 
+# Создания словаря result_main
+def result_gen(row, today):
+    
+    result = []
+    store = row['st_id']
+    product = row['pr_sku_id']
+    forecast_date = pd.to_datetime(row['date']).strftime('%m/%d/%Y')
+    prediction_sales = row['sales_units']
 
-def get_stores():
-    stores_url = get_address(URL_STORES)
-    resp = requests.get(stores_url)
-    if resp.status_code != 200:
-        _logger.warning("Could not get stores list")
-        return []
-    return resp.json()["data"]
-
-
-def get_sales(store=None, sku=None):
-    sale_url = get_address(URL_SALES)
-    params = {}
-    if store is not None:
-        params["store"] = store
-    if sku is not None:
-        params["sku"] = sku
-    resp = requests.get(sale_url, params=params)
-    if resp.status_code != 200:
-        _logger.warning("Could not get sales history")
-        return []
-    return resp.json()["data"]
-
-
-def get_categs_info():
-    categs_url = get_address(URL_CATEGORIES)
-    resp = requests.get(categs_url)
-    if resp.status_code != 200:
-        _logger.warning("Could not get category info")
-        return {}
-    result = {el["sku"]: el for el in resp.json()["data"]}
+    result.append({'store': store,
+                   'forecast_date': today,
+                   'forecast': {'sku': product,
+                                'sales_units': (forecast_date, prediction_sales)}})
+    
     return result
 
+result_main = df_to_endpoint.apply(result_gen, today=today, axis = 1)
 
-def main(today=date.today()):
-    forecast_dates = [today + timedelta(days=d) for d in range(1, 6)]
-    forecast_dates = [el.strftime("%Y-%m-%d") for el in forecast_dates]
-    categs_info = get_categs_info()
-    for store in get_stores():
-        result = []
-        for item in get_sales(store=store["store"]):
-            item_info = categs_info[item["sku"]]
-            sales = item["fact"]
-            prediction = forecast(sales, item_info, store)
-            result.append({"store": store["store"],
-                           "forecast_date": today.strftime("%Y-%m-%d"),
-                           "forecast": {"sku": item["sku"],
-                                        "sales_units": {k: v for k, v in zip(forecast_dates, prediction)}
-                                        }
-                          })
-        requests.post(get_address(URL_FORECAST), json={"data": result})
+# main
+def main(result_main):
 
-
-if __name__ == "__main__":
-    setup_logging()
-    main()
+    for value in result_main:
+        requests.post(get_address(URL_FORECAST), json={"data": value}) 
