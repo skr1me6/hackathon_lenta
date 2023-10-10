@@ -23,7 +23,7 @@
 Итоговые файлы:
 * [eda_final.ipynb](eda_final.ipynb) - Итоговый файл с EDA;
 * [preprocess.ipynb](preprocess.ipynb) - Итоговая обработка данных перед обучением;
-* [model_final.ipynb](model_final.ipynb) - Итоговая модель машинного обучения с важностьб признаков;
+* [model_final.ipynb](model_final.ipynb) - Итоговая модель машинного обучения с важностью признаков;
 * [sales_submission_csv_fill.ipynb](sales_submission_csv_fill.ipynb) - Заполнения файла sales_submission;
 * [sales_submission_filled.csv](sales_submission_filled.csv) - Заполненный файл sales_submission;
 * [solution_description.docx](solution_description.docx) - Описание решения. Приведены признаки, алгоритм обучения и важность признаков.
