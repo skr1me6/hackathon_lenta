@@ -18,15 +18,15 @@
     - [Описание работы пользователя с системой](https://disk.yandex.ru/i/69TpNiaDQGfx2Q)
 
 ## Структура репозитория
-/drafts, /prefinal_models, Тест модели 2 сезон, /ml - Черновики и файлы
+/drafts, /prefinal_models, Тест модели 2 сезон, /ml - Черновики и файлы.
 
 Итоговые файлы:
-* [eda_final.ipynb](eda_final.ipynb) - Итоговый файл с EDA
-* [preprocess.ipynb](preprocess.ipynb) - Итоговая обработка данных перед обучением
-* [model_final.ipynb](model_final.ipynb) - Итоговая модель машинного обучения с важностьб признаков
-* [sales_submission_csv_fill.ipynb](sales_submission_csv_fill.ipynb) - Заполнения файла sales_submission
-* [sales_submission_filled.csv](sales_submission_filled.csv) - Заполненный файл sales_submission
-* [solution_description.docx](solution_description.docx) - В описании решения приведены признаки, алгоритм обучения и важность признаков
+* [eda_final.ipynb](eda_final.ipynb) - Итоговый файл с EDA;
+* [preprocess.ipynb](preprocess.ipynb) - Итоговая обработка данных перед обучением;
+* [model_final.ipynb](model_final.ipynb) - Итоговая модель машинного обучения с важностьб признаков;
+* [sales_submission_csv_fill.ipynb](sales_submission_csv_fill.ipynb) - Заполнения файла sales_submission;
+* [sales_submission_filled.csv](sales_submission_filled.csv) - Заполненный файл sales_submission;
+* [solution_description.docx](solution_description.docx) - Описание решения. Приведены признаки, алгоритм обучения и важность признаков.
 
 ## Чек-лист по работе 
 1. Файл в зафиксированном формате с результатом прогноза спроса (sales_submission.csv) ✔️.
