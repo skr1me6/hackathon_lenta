@@ -18,7 +18,7 @@
     - [Описание работы пользователя с системой](https://disk.yandex.ru/i/69TpNiaDQGfx2Q)
 
 ## Структура репозитория
-/drafts, /prefinal_models, Тест модели 2 сезон, /ml - Черновики и файлы.
+/drafts, /prefinal_models, Тест модели 2 сезон - Черновики и файлы.
 
 Итоговые файлы:
 * [eda_final.ipynb](eda_final.ipynb) - Итоговый файл с EDA;
