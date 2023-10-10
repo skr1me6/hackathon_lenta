@@ -26,7 +26,7 @@
 * [model_final.ipynb](model_final.ipynb) - Итоговая модель машинного обучения с важностьб признаков
 * [sales_submission_csv_fill.ipynb](sales_submission_csv_fill.ipynb) - Заполнения файла sales_submission
 * [sales_submission_filled.csv](sales_submission_filled.csv) - Заполненный файл sales_submission
-* [Описание решения.docx](Описание решения.docx) - В описании решения приведены признаки, алгоритм обучения и важность признаков
+* [solution_description.docx](solution_description.docx) - В описании решения приведены признаки, алгоритм обучения и важность признаков
 
 ## Чек-лист по работе 
 1. Файл в зафиксированном формате с результатом прогноза спроса (sales_submission.csv) ✔️.
